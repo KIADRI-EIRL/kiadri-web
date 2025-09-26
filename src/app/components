@@ -1,0 +1,77 @@
+// components/Logo.tsx
+export default function Logo() {
+  return (
+    <div className="flex items-center gap-2">
+      <div className="h-7 w-7 rounded-full bg-brand-500" />
+      <span className="font-semibold tracking-tight">Kiadri</span>
+    </div>
+  );
+}
+
+
+// components/Header.tsx
+import Link from "next/link";
+import Logo from "./Logo";
+
+const links = [
+  { href: "/servicios", label: "Servicios" },
+  { href: "/cursos", label: "Cursos" },
+  { href: "/blog", label: "Blog" },
+  { href: "/sobre-mi", label: "Sobre mí" },
+  { href: "/contacto", label: "Contacto" },
+];
+
+export default function Header() {
+  return (
+    <header className="border-b">
+      <div className="container h-16 flex items-center justify-between">
+        <Link href="/" aria-label="Kiadri - Inicio"><Logo /></Link>
+        <nav className="hidden md:flex gap-6">
+          {links.map(l => (
+            <Link key={l.href} className="text-sm hover:text-brand-600" href={l.href}>
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+        <Link
+          href="/contacto"
+          className="rounded-lg bg-brand-500 px-3.5 py-2 text-sm font-medium text-white hover:bg-brand-600 transition"
+        >
+          Reserva tu cita
+        </Link>
+      </div>
+    </header>
+  );
+}
+
+
+// components/Footer.tsx
+import Link from "next/link";
+
+export default function Footer() {
+  return (
+    <footer className="border-t mt-16">
+      <div className="container py-10 grid gap-6 md:grid-cols-3 text-sm">
+        <div>
+          <p className="font-semibold">Kiadri</p>
+          <p className="text-gray-600 mt-2">Confianza que sana.</p>
+        </div>
+        <div>
+          <p className="font-semibold">Enlaces</p>
+          <ul className="mt-2 space-y-1">
+            <li><Link href="/politica-de-privacidad">Privacidad</Link></li>
+            <li><Link href="/terminos">Términos</Link></li>
+            <li><Link href="/contacto">Contacto</Link></li>
+          </ul>
+        </div>
+        <div>
+          <p className="font-semibold">Suscríbete</p>
+          <p className="text-gray-600 mt-2">Recibe contenidos de salud femenina verificados.</p>
+        </div>
+      </div>
+      <div className="text-center text-xs text-gray-500 pb-6">
+        © {new Date().getFullYear()} Kiadri. Todos los derechos reservados.
+      </div>
+    </footer>
+  );
+}
